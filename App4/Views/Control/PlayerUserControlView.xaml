@@ -1,0 +1,19 @@
+﻿<UserControl
+    x:Class="点棒数え.Views.PlayerUserControlView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:点棒数え.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+             xmlns:prism="http://prismlibrary.com/"   
+
+    >
+
+    <StackPanel Orientation="Horizontal">
+        <TextBlock x:Name="風" Text="{Binding Kaze,Mode=TwoWay}" />
+        <TextBox x:Name="名前" Text="{Binding Name,Mode=TwoWay}" />
+        <TextBox x:Name="点数" Text="{Binding Tensu,Mode=TwoWay}" />
+        <Button Content="リーチ" Command="{Binding Reche}"/>
+    </StackPanel>
+</UserControl>

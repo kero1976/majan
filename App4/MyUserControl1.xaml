@@ -1,15 +1,14 @@
 ﻿<UserControl x:Name="Custom1"
-    x:Class="App4.MyUserControl1"
+    x:Class="点棒数え.MyUserControl1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:App4"
+    xmlns:local="using:点棒数え"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+
     mc:Ignorable="d" Height="30">
     <StackPanel Orientation="Horizontal" >
-        <TextBlock x:Name="KAZE" TextWrapping="Wrap" Text="TextBlock"/>
-        <TextBox x:Name="PLAYER" TextWrapping="Wrap" Text="TextBox"/>
-        <TextBox x:Name="TENSU" TextWrapping="Wrap" Text="TextBox"/>
+
     </StackPanel>
 
 

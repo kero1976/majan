@@ -1,8 +1,9 @@
-﻿<Application
-    x:Class="App4.App"
+﻿<prism:PrismUnityApplication
+    x:Class="点棒数え.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:App4"
+    xmlns:local="using:点棒数え"
+    xmlns:prism="using:Prism.Unity.Windows"
     RequestedTheme="Light">
 
-</Application>
+</prism:PrismUnityApplication>
