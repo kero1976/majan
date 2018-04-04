@@ -11,9 +11,9 @@
     >
 
     <StackPanel Orientation="Horizontal">
-        <TextBlock x:Name="風" Text="{Binding Kaze,Mode=TwoWay}" />
-        <TextBox x:Name="名前" Text="{Binding Name,Mode=TwoWay}" />
-        <TextBox x:Name="点数" Text="{Binding Tensu,Mode=TwoWay}" />
+        <TextBlock x:Name="風" Text="{Binding Kaze.Value,Mode=TwoWay}" />
+        <TextBox x:Name="名前" Text="{Binding Name.Value,Mode=TwoWay}" />
+        <TextBox x:Name="点数" Text="{Binding Tensu.Value,Mode=TwoWay}" />
         <Button Content="リーチ" Command="{Binding Reche}"/>
     </StackPanel>
 </UserControl>

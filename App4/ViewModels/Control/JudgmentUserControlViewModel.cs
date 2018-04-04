@@ -1,22 +1,20 @@
 ﻿using Prism.Windows.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 using 点棒数え.Model;
 
 namespace 点棒数え.ViewModels
 {
-    class JudgmentUserControlViewModel: ViewModelBase
+    public class JudgmentUserControlViewModel: ViewModelBase
     {
-        private Judgment judgment = Judgment.Instance;
+        
 
+        public ReactiveProperty<int> 千点棒 { get; private set; }
 
-        public int 千点棒
+        public JudgmentUserControlViewModel()
         {
-            get { return this.judgment.sentenbou; }
-            set { SetProperty(ref this.judgment.sentenbou, value); }
+            Judgment judgment = Judgment.Instance;
+            this.千点棒 = judgment.ObserveProperty(x => x.Sentenbou).ToReactiveProperty();
         }
     }
 }

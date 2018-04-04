@@ -9,7 +9,7 @@ namespace 点棒数え.Model
     /// 審判クラス。
     /// </summary>
     /// 審判は1人のため、シングルトン。
-    public class Judgment : IObserver<宣言>
+    public class Judgment : BindableBase, IObserver<宣言>
     {
         private static Judgment instance = new Judgment();
 
@@ -17,7 +17,11 @@ namespace 点棒数え.Model
         private Judgment() { }
 
         public int sentenbou = 0;
-
+        public int Sentenbou
+        {
+            get { return this.sentenbou; }
+            set { SetProperty(ref this.sentenbou, value); }
+        }
 
         public static Judgment Instance
         {
@@ -40,13 +44,13 @@ namespace 点棒数え.Model
             switch (value)
             {
                 case 宣言.リーチ:
-                    sentenbou++;
+                    Sentenbou++;
                     break;
                 case 宣言.ツモ:
-                    sentenbou = 0;
+                    Sentenbou = 0;
                     break;
             }
-            Debug.WriteLine("審判「千点棒は{0}」", sentenbou);
+            Debug.WriteLine("審判「千点棒は{0}」", Sentenbou);
         }
 
     }

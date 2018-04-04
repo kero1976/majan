@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Windows.Mvvm;
+using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using 点棒数え.Common;
 using 点棒数え.Model;
+using Reactive.Bindings.Extensions;
 
 namespace 点棒数え.ViewModels
 {
@@ -20,22 +22,23 @@ namespace 点棒数え.ViewModels
     {
         private Player player;
 
+        public ReactiveProperty<int> Tensu { get; private set; }
+
         public PlayerUserControlViewModel(風 kaze, string name, string tensu)
         {
             this.player = new Player(kaze, int.Parse(tensu));
             player.Subscribe(Judgment.Instance);
             this.player.name = name;
-
+            this.Tensu = player.ObserveProperty(x => x.Tensu).ToReactiveProperty();
 
             this.Reche = new DelegateCommand(() =>
             {
 
                 Debug.WriteLine("リーチが押されます");
                 player.Rech();
-                int temp = Tensu;
+
                 Debug.WriteLine("リーチが押されました");
-                Tensu = int.MaxValue;
-                Tensu = temp;
+
                 
             });
 
@@ -55,11 +58,11 @@ namespace 点棒数え.ViewModels
         }
 
 
-        public int Tensu
-        {
-            set { this.SetProperty(ref this.player.tensu, value); }
-            get { return this.player.tensu; }
-        }
+        //public int Tensu
+        //{
+        //    set { this.SetProperty(ref this.player.tensu, value); }
+        //    get { return this.player.tensu; }
+        //}
 
         public DelegateCommand Reche { get; }
 

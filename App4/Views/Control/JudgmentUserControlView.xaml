@@ -11,6 +11,6 @@
 
     <StackPanel Orientation="Horizontal">
         <TextBlock Text="リー棒" />
-        <TextBox Text="{Binding 千点棒,Mode=TwoWay}"/>
+        <TextBox Text="{Binding 千点棒.Value,Mode=TwoWay}"/>
     </StackPanel>
 </UserControl>
