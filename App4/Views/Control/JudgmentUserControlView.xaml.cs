@@ -1,5 +1,4 @@
-﻿using Prism.Mvvm;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,15 +15,13 @@ using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace 点棒数え
+namespace 点棒数え.Views
 {
-    public sealed partial class MyUserControl1 : UserControl
+    public sealed partial class JudgmentUserControlView : UserControl
     {
-        public MyUserControl1()
+        public JudgmentUserControlView()
         {
             this.InitializeComponent();
         }
-
-
     }
 }

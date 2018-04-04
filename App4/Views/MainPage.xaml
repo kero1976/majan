@@ -19,5 +19,6 @@
                    Style="{StaticResource BodyTextBlockStyle}" />
         <Control:PlayerUserControlView DataContext="{x:Bind ViewModel.P1}"/>
         <Control:PlayerUserControlView DataContext="{x:Bind ViewModel.P2}"/>
+        <Control:JudgmentUserControlView DataContext="{x:Bind ViewModel.Judg}" />
     </StackPanel>
 </Page>

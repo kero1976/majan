@@ -2,62 +2,71 @@
 using Prism.Windows.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using 点棒数え.Common;
+using 点棒数え.Model;
 
 namespace 点棒数え.ViewModels
 {
+    /// <summary>
+    /// プレイヤー用のViewに対するViewModel。
+    /// </summary>
+    /// ViewModelは内部変数を持たず、Modelのみ持つようにする。
+    /// ModelはViewModelからのみアクセスするような制約を持たせたいが、とりあえず未実装。
     public class PlayerUserControlViewModel : ViewModelBase
     {
-        public PlayerUserControlViewModel(string kaze, string name, string tensu)
+        private Player player;
+
+        public PlayerUserControlViewModel(風 kaze, string name, string tensu)
         {
-            this.kaze = kaze;
-            this.name = name;
-            this.tensu = tensu;
+            this.player = new Player(kaze, int.Parse(tensu));
+            player.Subscribe(Judgment.Instance);
+            this.player.name = name;
+
 
             this.Reche = new DelegateCommand(() =>
             {
-                this.Tensu = "0";
+
+                Debug.WriteLine("リーチが押されます");
+                player.Rech();
+                int temp = Tensu;
+                Debug.WriteLine("リーチが押されました");
+                Tensu = int.MaxValue;
+                Tensu = temp;
+                
             });
 
         }
+        
+        //public int Kaze
+        //{
+        //    set { this.SetProperty(ref this.player.kaze, value); }
+        //    get { return this.player.kaze; }
+        //}
 
-        public PlayerUserControlViewModel()
-        {
-            this.kaze = "A";
-            this.name = "A";
-            this.tensu = "A";
-        }
 
-        private string kaze;
-        public string Kaze
-        {
-            set { this.SetProperty(ref this.kaze, value); }
-            get { return this.kaze; }
-        }
-
-        private string name;
         public string Name
         {
-            set { this.SetProperty(ref this.name, value); }
-            get { return this.name; }
+            set { this.SetProperty(ref this.player.name, value); }
+            get { return this.player.name; }
         }
 
-        private string tensu;
-        public string Tensu
-        {
-            set { this.SetProperty(ref this.tensu, value); }
-            get { return this.tensu; }
-        }
 
-        public override string ToString()
+        public int Tensu
         {
-            return Kaze + ":" + Name + ":" + Tensu;
+            set { this.SetProperty(ref this.player.tensu, value); }
+            get { return this.player.tensu; }
         }
 
         public DelegateCommand Reche { get; }
 
+        public override string ToString()
+        {
+            return ":" + Name + ":";// + Tensu;
+        }
 
     }
 }

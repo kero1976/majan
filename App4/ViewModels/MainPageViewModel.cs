@@ -6,14 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Prism.Commands;
 using 点棒数え.ViewModels;
+using 点棒数え.Common;
 
 namespace 点棒数え.ViewModels
 {
     class MainPageViewModel : ViewModelBase
     {
-        public PlayerUserControlViewModel P1 = new PlayerUserControlViewModel("A", "B", "C");
-        public PlayerUserControlViewModel P2 = new PlayerUserControlViewModel("X", "Y", "Z");
-
+        public PlayerUserControlViewModel P1 = new PlayerUserControlViewModel(風.東, "B", "10000");
+        public PlayerUserControlViewModel P2 = new PlayerUserControlViewModel(風.南, "Y", "2000");
+        public JudgmentUserControlViewModel Judg = new JudgmentUserControlViewModel();
         private string input;
 
         public string Input
