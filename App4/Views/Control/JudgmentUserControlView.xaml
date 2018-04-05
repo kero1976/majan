@@ -12,9 +12,9 @@
     <StackPanel Orientation="Horizontal">
         <TextBlock Text="局面" VerticalAlignment="Center" />
         <TextBox Text="{Binding 局面.Value,Mode=TwoWay}"/>
-        <Button Content="◀" Command="{Binding 場前}"/>
-        <Button Content="クリア" Command="{Binding 場クリア}" Margin="5"/>
-            <Button Content="▶" Command="{Binding 場次}"/>
+        <Button Content="◀" Command="{Binding 局面操作}" CommandParameter="-1"/>
+        <Button Content="クリア" Command="{Binding 局面操作}" CommandParameter="0" Margin="5"/>
+        <Button Content="▶" Command="{Binding 局面操作}" CommandParameter="1"/>
         <TextBlock Text="リー棒" VerticalAlignment="Center" />
         <TextBox Text="{Binding 千点棒.Value,Mode=TwoWay}"/>
         <TextBlock Text="本場" VerticalAlignment="Center" />

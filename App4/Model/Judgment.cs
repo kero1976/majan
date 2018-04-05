@@ -83,32 +83,31 @@ namespace 点棒数え.Model
             {
                 case 宣言.リーチ:
                     Sentenbou++;
-                    Ba--;
                     break;
                 case 宣言.ツモ:
                     Sentenbou = 0;
-                    players[0].Tensu -= -2000;
-                    players[1].Tensu -= -2000;
-                    players[2].Tensu -= -2000;
-                    players[3].Tensu -= -2000;
-                    Ba++;
                     break;
             }
             Debug.WriteLine("審判「千点棒は{0}」", Sentenbou);
         }
-        public void BaNext()
-        {
-            Ba++;
-        }
 
-        public void BaBack()
+        /// <summary>
+        /// 局面の操作
+        /// </summary>
+        /// <param name="param">前へ(-1)、次へ(1)、最初に戻る(0)</param>
+        public void BaControl(string param)
         {
-            Ba--;
-        }
-
-        public void BaClear()
-        {
-            Ba = 場.東一;
+            switch (param){
+                case "-1":
+                    Ba--;
+                    break;
+                case "0":
+                    Ba = 場.東一;
+                    break;
+                case "1":
+                    Ba++;
+                    break;
+            }
         }
 
         /// <summary>
