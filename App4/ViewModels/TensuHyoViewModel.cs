@@ -20,7 +20,7 @@ namespace 点棒数え.ViewModels
         public 飜数 Han
         {
             get { return this.han; }
-            set { SetProperty(ref this.han, value); }
+            set { SetProperty(ref this.han, value); Ten = Judgment.Instance.AgariTen(Han, Fu); }
         }
 
         //Enum配列のプロパティ
@@ -32,7 +32,7 @@ namespace 点棒数え.ViewModels
         public 符数 Fu
         {
             get { return this.fu; }
-            set { SetProperty(ref this.fu, value); }
+            set { SetProperty(ref this.fu, value); Ten = Judgment.Instance.AgariTen(Han, Fu); }
         }
         //Enum名前辞書のプロパティ
         public Dictionary<符数, string> FuNames { get; } = new Dictionary<符数, string>
@@ -56,8 +56,7 @@ namespace 点棒数え.ViewModels
         {
             this.TenKeisai = new DelegateCommand(() =>
             {
-                Debug.WriteLine("ふ" + Fu + ",はん" + Han);
-                Ten = Judgment.Instance.AgariTen(Han, Fu);
+
             });
         }
         public DelegateCommand TenKeisai { get; } 
