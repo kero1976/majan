@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using 点棒数え.Common;
+using 点棒数え.Model;
 
 namespace 点棒数え.ViewModels
 {
@@ -15,7 +16,7 @@ namespace 点棒数え.ViewModels
     class TensuHyoViewModel : ViewModelBase
     {
         // 選択値を保存するプロパティ
-        private 飜数 han = 飜数.満貫;
+        private 飜数 han;
         public 飜数 Han
         {
             get { return this.han; }
@@ -26,7 +27,7 @@ namespace 点棒数え.ViewModels
         public 飜数[] HansuEnum { get; } = (飜数[])Enum.GetValues(typeof(飜数));
 
         // 選択値を保存するプロパティ
-        private 符数 fu = 符数.符30;
+        private 符数 fu;
 
         public 符数 Fu
         {
@@ -44,6 +45,7 @@ namespace 点棒数え.ViewModels
             [符数.符60] = "60符",
         };
 
+
         private int ten;
         public int Ten
         {
@@ -55,8 +57,7 @@ namespace 点棒数え.ViewModels
             this.TenKeisai = new DelegateCommand(() =>
             {
                 Debug.WriteLine("ふ" + Fu + ",はん" + Han);
-                Debug.WriteLine("点数:" + Keisan.Ten(Han, Fu, 親子.親));
-                Ten = Keisan.Ten(Han, Fu, 親子.親);
+                Ten = Judgment.Instance.AgariTen(Han, Fu);
             });
         }
         public DelegateCommand TenKeisai { get; } 

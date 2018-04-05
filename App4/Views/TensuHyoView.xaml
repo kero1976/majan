@@ -12,8 +12,8 @@
 
     <StackPanel>
         <StackPanel Orientation="Horizontal">
-            <RadioButton GroupName="Group1" Name="親">親</RadioButton>
-            <RadioButton GroupName="Group1" Name="子">子</RadioButton>
+            <RadioButton GroupName="Group1" x:Name="親2">親</RadioButton>
+            <RadioButton GroupName="Group1" x:Name="子2">子</RadioButton>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="飜数"/>
@@ -26,5 +26,7 @@
             <TextBox Text="{Binding Ten}"/>
         </StackPanel>
         <Button Content="点数計算" Command="{Binding TenKeisai}"/>
+        <Button Content="キャンセル" Click="Button_Click"/>
+        <Button Content="デバッグ" Click="Button_Click_1" />
     </StackPanel>
 </Page>

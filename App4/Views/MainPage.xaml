@@ -1,13 +1,15 @@
-﻿<Page xmlns:Control="using:点棒数え.Views"  xmlns:my="using:点棒数え" 
+﻿<!-- ページ遷移すると値がクリアされるため、NavigationCacheModeを指定する -->
+    <Page xmlns:Control="using:点棒数え.Views"  xmlns:my="using:点棒数え" 
     x:Class="点棒数え.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:点棒数え.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-          xmlns:mvvm="using:Prism.Windows.Mvvm"
-      mvvm:ViewModelLocator.AutoWireViewModel="True"
-
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
+    d:DesignWidth="500"
+    NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
     
@@ -19,5 +21,9 @@
         <Control:PlayerUserControlView DataContext="{x:Bind ViewModel.P4}"/>
         <Control:JudgmentUserControlView DataContext="{x:Bind ViewModel.Judg}" />
         <Button Content="Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Button_Click"/>
+        <ScrollViewer Height="151">
+            <TextBox Text="{Binding DebugMemo}" TextWrapping="Wrap"  AcceptsReturn="True"/>
+        </ScrollViewer>
+
     </StackPanel>
 </Page>

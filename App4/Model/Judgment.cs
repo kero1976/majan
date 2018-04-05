@@ -33,6 +33,32 @@ namespace 点棒数え.Model
             get { return this.sentenbou; }
             set { SetProperty(ref this.sentenbou, value); }
         }
+        private 親子 oyako;
+        public 親子 Oyako
+        {
+            get { return this.oyako; }
+            set { SetProperty(ref this.oyako, value); }
+        }
+
+        private 場 ba;
+        public 場 Ba
+        {
+            get { return this.ba; }
+            // 東一より小さい場合は東一にする。北四より大きい場合も東一にする
+            set {
+                if(value < 場.東一)
+                {
+                    SetProperty(ref this.ba, 場.東一);
+                }else if(場.北四 < value)
+                {
+                    SetProperty(ref this.ba, 場.東一);
+                }
+                else
+                {
+                    SetProperty(ref this.ba, value);
+                }
+            }
+        }
         #endregion
 
         public static Judgment Instance
@@ -57,6 +83,7 @@ namespace 点棒数え.Model
             {
                 case 宣言.リーチ:
                     Sentenbou++;
+                    Ba--;
                     break;
                 case 宣言.ツモ:
                     Sentenbou = 0;
@@ -64,9 +91,48 @@ namespace 点棒数え.Model
                     players[1].Tensu -= -2000;
                     players[2].Tensu -= -2000;
                     players[3].Tensu -= -2000;
+                    Ba++;
                     break;
             }
             Debug.WriteLine("審判「千点棒は{0}」", Sentenbou);
+        }
+        public void BaNext()
+        {
+            Ba++;
+        }
+
+        public void BaBack()
+        {
+            Ba--;
+        }
+
+        public void BaClear()
+        {
+            Ba = 場.東一;
+        }
+
+        /// <summary>
+        /// あがったプレイヤーが親か判定し、親判定プロパティに値をセットする
+        /// </summary>
+        /// <param name="winner"></param>
+        /// <returns></returns>
+        public bool IsOya(風 winner)
+        {
+            bool oya = Hantei.IsOya(winner, Ba);
+            if (oya)
+            {
+                Oyako = 親子.親;
+            }
+            else
+            {
+                Oyako = 親子.子;
+            }
+            return oya;
+        }
+
+        public int AgariTen(飜数 han, 符数 fu)
+        {
+            return Keisan.Ten(han, fu, Oyako);
         }
 
     }

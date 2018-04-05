@@ -100,6 +100,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Enum.cs" />
+    <Compile Include="Common\Hantei.cs" />
     <Compile Include="Common\Keisan.cs" />
     <Compile Include="Model\Judgment.cs" />
     <Compile Include="Model\JudgmentDisposer.cs" />
@@ -137,6 +138,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="作業メモ.txt" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

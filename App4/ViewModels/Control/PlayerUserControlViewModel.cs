@@ -20,9 +20,9 @@ namespace 点棒数え.ViewModels
         public ReactiveProperty<string> Name { get; private set; }
         public ReactiveProperty<風> Kaze { get; private set; }
 
-        public PlayerUserControlViewModel(風 kaze, string name, string tensu)
+        public PlayerUserControlViewModel(風 kaze, string name, int tensu)
         {
-            this.player = new Player(kaze, name, int.Parse(tensu));
+            this.player = new Player(kaze, name, tensu);
             this.player.Subscribe(Judgment.Instance);
 
             this.Tensu = this.player.ObserveProperty(x => x.Tensu).ToReactiveProperty();
@@ -35,7 +35,12 @@ namespace 点棒数え.ViewModels
                 Debug.WriteLine("リーチが押されます");
                 this.player.Rech();
             });
+            this.Tumo = new DelegateCommand(() =>
+            {
 
+                Debug.WriteLine("ツモが押されます");
+                this.player.Tumo(1000);
+            });
 
 
         }
@@ -43,6 +48,9 @@ namespace 点棒数え.ViewModels
         public DelegateCommand Reche { get; }
         public DelegateCommand Tumo { get; set; }
 
-
+        public string DebugOut()
+        {
+            return $"風:{Kaze},名前:{Name},点数:{Tensu}";
+        }
     }
 }

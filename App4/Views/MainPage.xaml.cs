@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using Prism.Commands;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using 点棒数え.ViewModels;
 
@@ -16,16 +17,16 @@ namespace 点棒数え.Views
         public MainPage()
         {
             this.InitializeComponent();
-        }
-
-        private void MyUserControl1_Loaded(object sender, RoutedEventArgs e)
-        {
-
+            ViewModel.P1.Tumo = new DelegateCommand(() => Frame.Navigate(typeof(TensuHyoView), ViewModel.P1.Kaze.Value));
+            ViewModel.P2.Tumo = new DelegateCommand(() => Frame.Navigate(typeof(TensuHyoView), ViewModel.P2.Kaze.Value));
+            ViewModel.P3.Tumo = new DelegateCommand(() => Frame.Navigate(typeof(TensuHyoView), ViewModel.P3.Kaze.Value));
+            ViewModel.P4.Tumo = new DelegateCommand(() => Frame.Navigate(typeof(TensuHyoView), ViewModel.P4.Kaze.Value));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(TensuHyoView));
         }
+
     }
 }

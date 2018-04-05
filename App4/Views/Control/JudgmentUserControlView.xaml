@@ -6,11 +6,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
+    d:DesignHeight="100"
     d:DesignWidth="400">
 
     <StackPanel Orientation="Horizontal">
-        <TextBlock Text="リー棒" />
+        <TextBlock Text="局面" VerticalAlignment="Center" />
+        <TextBox Text="{Binding 局面.Value,Mode=TwoWay}"/>
+        <Button Content="◀" Command="{Binding 場前}"/>
+        <Button Content="クリア" Command="{Binding 場クリア}" Margin="5"/>
+            <Button Content="▶" Command="{Binding 場次}"/>
+        <TextBlock Text="リー棒" VerticalAlignment="Center" />
         <TextBox Text="{Binding 千点棒.Value,Mode=TwoWay}"/>
+        <TextBlock Text="本場" VerticalAlignment="Center" />
+        <TextBox Text="{Binding 本場.Value,Mode=TwoWay}"/>
     </StackPanel>
 </UserControl>
