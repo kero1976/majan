@@ -17,13 +17,14 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="飜数"/>
-            <ComboBox ItemsSource="{Binding HansuEnum}" SelectedValue="{Binding Han}"/>
+            <ComboBox ItemsSource="{Binding HansuEnum}" SelectedValue="{Binding Han,Mode=TwoWay}"/>
             <TextBlock Text="符"/>
-            <ComboBox ItemsSource="{Binding FuEnum}" SelectedValue="{Binding Fu}"/>
+            <ComboBox ItemsSource="{Binding FuNames}" SelectedValue="{Binding Fu,Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="点数"/>
             <TextBox />
         </StackPanel>
+        <Button Content="点数計算" Command="{Binding TenKeisai}"/>
     </StackPanel>
 </Page>

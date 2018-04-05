@@ -100,6 +100,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Enum.cs" />
+    <Compile Include="Common\Keisan.cs" />
     <Compile Include="Model\Judgment.cs" />
     <Compile Include="Model\JudgmentDisposer.cs" />
     <Compile Include="Model\Player.cs" />
