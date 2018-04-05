@@ -3,13 +3,15 @@ using Prism.Windows.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using 点棒数え.Common;
 
 namespace 点棒数え.ViewModels
 {
+    /// <summary>
+    /// 点数計算表のViewModel
+    /// </summary>
+    /// EnumとComboboxのバインドを行っている。
+    /// Enumの値をそのまま表示する場合と、別の値で置き換える２パターンに対応。
     class TensuHyoViewModel : ViewModelBase
     {
         // 選択値を保存するプロパティ
@@ -42,12 +44,19 @@ namespace 点棒数え.ViewModels
             [符数.符60] = "60符",
         };
 
+        private int ten;
+        public int Ten
+        {
+            get { return this.ten; }
+            set { SetProperty(ref this.ten, value); }
+        }
         public TensuHyoViewModel()
         {
             this.TenKeisai = new DelegateCommand(() =>
             {
                 Debug.WriteLine("ふ" + Fu + ",はん" + Han);
                 Debug.WriteLine("点数:" + Keisan.Ten(Han, Fu, 親子.親));
+                Ten = Keisan.Ten(Han, Fu, 親子.親);
             });
         }
         public DelegateCommand TenKeisai { get; } 

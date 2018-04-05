@@ -1,15 +1,10 @@
 ﻿using Prism.Commands;
 using Prism.Windows.Mvvm;
 using Reactive.Bindings;
-using System;
-using System.Collections.Generic;
+using Reactive.Bindings.Extensions;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using 点棒数え.Common;
 using 点棒数え.Model;
-using Reactive.Bindings.Extensions;
 
 namespace 点棒数え.ViewModels
 {

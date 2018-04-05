@@ -1,15 +1,7 @@
-﻿using Prism.Windows.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Prism.Commands;
-using 点棒数え.ViewModels;
-using 点棒数え.Common;
+﻿using Prism.Commands;
+using Prism.Windows.Mvvm;
 using System.Diagnostics;
-using 点棒数え.Views;
-using Windows.UI.Xaml.Controls;
+using 点棒数え.Common;
 
 namespace 点棒数え.ViewModels
 {

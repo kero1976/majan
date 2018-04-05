@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace 点棒数え.Common
+﻿namespace 点棒数え.Common
 {
     public enum 風
     {
@@ -28,5 +22,11 @@ namespace 点棒数え.Common
     public enum 親子
     {
         親,子
+    }
+
+    public enum 場
+    {
+        東一, 東二, 東三, 東四, 南一, 南二, 南三, 南四,
+        西一, 西二, 西三, 西四, 北一, 北二, 北三, 北四,
     }
 }

@@ -23,7 +23,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="点数"/>
-            <TextBox />
+            <TextBox Text="{Binding Ten}"/>
         </StackPanel>
         <Button Content="点数計算" Command="{Binding TenKeisai}"/>
     </StackPanel>
