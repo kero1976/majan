@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-             xmlns:prism="http://prismlibrary.com/"   
-
+    xmlns:prism="http://prismlibrary.com/"   
+    d:DesignHeight="100"
     >
 
     <StackPanel Orientation="Horizontal">
@@ -15,5 +15,6 @@
         <TextBox x:Name="名前" Text="{Binding Name.Value,Mode=TwoWay}" />
         <TextBox x:Name="点数" Text="{Binding Tensu.Value,Mode=TwoWay}" />
         <Button Content="リーチ" Command="{Binding Reche}"/>
+        <Button Content="ツモ" Command="{Binding Tumo}"/>
     </StackPanel>
 </UserControl>

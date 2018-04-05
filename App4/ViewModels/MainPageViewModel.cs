@@ -7,46 +7,27 @@ using System.Threading.Tasks;
 using Prism.Commands;
 using 点棒数え.ViewModels;
 using 点棒数え.Common;
+using System.Diagnostics;
+using 点棒数え.Views;
+using Windows.UI.Xaml.Controls;
 
 namespace 点棒数え.ViewModels
 {
     class MainPageViewModel : ViewModelBase
     {
-        public PlayerUserControlViewModel P1 = new PlayerUserControlViewModel(風.東, "B", "10000");
-        public PlayerUserControlViewModel P2 = new PlayerUserControlViewModel(風.南, "Y", "2000");
+        public PlayerUserControlViewModel P1 = new PlayerUserControlViewModel(風.東, "プレイヤー1", "10000");
+        public PlayerUserControlViewModel P2 = new PlayerUserControlViewModel(風.南, "プレイヤー2", "2000");
+        public PlayerUserControlViewModel P3 = new PlayerUserControlViewModel(風.西, "プレイヤー3", "2000");
+        public PlayerUserControlViewModel P4 = new PlayerUserControlViewModel(風.北, "プレイヤー4", "2000");
         public JudgmentUserControlViewModel Judg = new JudgmentUserControlViewModel();
-        private string input;
-
-        public string Input
-        {
-            get { return this.input; }
-            set { this.SetProperty(ref this.input, value); }
-        }
-
-        private string output;
-
-        public string Output
-        {
-            get { return this.output; }
-            set { this.SetProperty(ref this.output, value); }
-        }
-
-        public DelegateCommand CreateOutputCommand { get; }
-
         public MainPageViewModel()
         {
-            this.CreateOutputCommand = new DelegateCommand(() =>
+            P1.Tumo = new DelegateCommand(() =>
             {
-                switch (Input)
-                {
 
+                Debug.WriteLine("ツモが押されます");
 
-                }
-                //this.Output = $"{Input}が入力されました";
-                this.Output = P1.ToString() + "," + P2.ToString();
-            },
-                () => !string.IsNullOrWhiteSpace(this.Input))
-                .ObservesProperty(() => this.Input);
+            });
         }
     }
 }

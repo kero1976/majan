@@ -17,59 +17,37 @@ namespace 点棒数え.ViewModels
     /// プレイヤー用のViewに対するViewModel。
     /// </summary>
     /// ViewModelは内部変数を持たず、Modelのみ持つようにする。
-    /// ModelはViewModelからのみアクセスするような制約を持たせたいが、とりあえず未実装。
     public class PlayerUserControlViewModel : ViewModelBase
     {
         private Player player;
 
         public ReactiveProperty<int> Tensu { get; private set; }
+        public ReactiveProperty<string> Name { get; private set; }
+        public ReactiveProperty<風> Kaze { get; private set; }
 
         public PlayerUserControlViewModel(風 kaze, string name, string tensu)
         {
-            this.player = new Player(kaze, int.Parse(tensu));
-            player.Subscribe(Judgment.Instance);
-            this.player.name = name;
-            this.Tensu = player.ObserveProperty(x => x.Tensu).ToReactiveProperty();
+            this.player = new Player(kaze, name, int.Parse(tensu));
+            this.player.Subscribe(Judgment.Instance);
+
+            this.Tensu = this.player.ObserveProperty(x => x.Tensu).ToReactiveProperty();
+            this.Name = this.player.ObserveProperty(x => x.Name).ToReactiveProperty();
+            this.Kaze = this.player.ObserveProperty(x => x.MyKaze).ToReactiveProperty();
 
             this.Reche = new DelegateCommand(() =>
             {
 
                 Debug.WriteLine("リーチが押されます");
-                player.Rech();
-
-                Debug.WriteLine("リーチが押されました");
-
-                
+                this.player.Rech();
             });
+
+
 
         }
         
-        //public int Kaze
-        //{
-        //    set { this.SetProperty(ref this.player.kaze, value); }
-        //    get { return this.player.kaze; }
-        //}
-
-
-        public string Name
-        {
-            set { this.SetProperty(ref this.player.name, value); }
-            get { return this.player.name; }
-        }
-
-
-        //public int Tensu
-        //{
-        //    set { this.SetProperty(ref this.player.tensu, value); }
-        //    get { return this.player.tensu; }
-        //}
-
         public DelegateCommand Reche { get; }
+        public DelegateCommand Tumo { get; set; }
 
-        public override string ToString()
-        {
-            return ":" + Name + ":";// + Tensu;
-        }
 
     }
 }

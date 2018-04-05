@@ -12,13 +12,12 @@
 
     
     <StackPanel x:Name="ST" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBox Text="{x:Bind ViewModel.Input, Mode=TwoWay}" />
-        <Button Content="メッセージ作成"
-                Command="{x:Bind ViewModel.CreateOutputCommand}" />
-        <TextBlock Text="{x:Bind ViewModel.Output, Mode=OneWay}"
-                   Style="{StaticResource BodyTextBlockStyle}" />
+
         <Control:PlayerUserControlView DataContext="{x:Bind ViewModel.P1}"/>
         <Control:PlayerUserControlView DataContext="{x:Bind ViewModel.P2}"/>
+        <Control:PlayerUserControlView DataContext="{x:Bind ViewModel.P3}"/>
+        <Control:PlayerUserControlView DataContext="{x:Bind ViewModel.P4}"/>
         <Control:JudgmentUserControlView DataContext="{x:Bind ViewModel.Judg}" />
+        <Button Content="Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Button_Click"/>
     </StackPanel>
 </Page>

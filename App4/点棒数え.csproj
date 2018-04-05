@@ -107,6 +107,7 @@
     <Compile Include="ViewModels\Control\PlayerUserControlViewModel.cs" />
     <Compile Include="ViewModels\Control\JudgmentUserControlViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\TensuHyoViewModel.cs" />
     <Compile Include="Views\Control\JudgmentUserControlView.xaml.cs">
       <DependentUpon>JudgmentUserControlView.xaml</DependentUpon>
     </Compile>
@@ -115,6 +116,9 @@
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TensuHyoView.xaml.cs">
+      <DependentUpon>TensuHyoView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +151,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TensuHyoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
