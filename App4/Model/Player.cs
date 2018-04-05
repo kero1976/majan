@@ -79,18 +79,11 @@ namespace 点棒数え.Model
             if (this.myJudgment != null)
                 this.myJudgment.OnNext(宣言.ツモ);
         }
-        public void Shiharai(宣言 type, 風 kaze, int ten)
+        public void Shiharai(int ten)
         {
-            switch (type)
-            {
-                case 宣言.ツモ:
-                    // 自分が親の場合と子の場合で
-                    break;
-                case 宣言.ロン:
-                    break;
-                default:
-                    break;
-            }
+            Tensu = Tensu - ten;
+            if (this.myJudgment != null)
+                this.myJudgment.OnNext(宣言.支払);
         }
         /// <summary>
         /// 監視開始

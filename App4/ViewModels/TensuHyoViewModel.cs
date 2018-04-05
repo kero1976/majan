@@ -56,7 +56,7 @@ namespace 点棒数え.ViewModels
         {
             this.TenKeisai = new DelegateCommand(() =>
             {
-
+                Judgment.Instance.TumoAgari(Ten);
             });
         }
         public DelegateCommand TenKeisai { get; } 

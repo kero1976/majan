@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using 点棒数え.Common;
+using System.Linq;
 
 namespace 点棒数え.Model
 {
@@ -38,6 +39,13 @@ namespace 点棒数え.Model
         {
             get { return this.oyako; }
             set { SetProperty(ref this.oyako, value); }
+        }
+
+        private 風 winner;
+        public 風 Winner
+        {
+            get { return this.winner; }
+            set { SetProperty(ref this.winner, value); }
         }
 
         private 場 ba;
@@ -111,12 +119,43 @@ namespace 点棒数え.Model
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ten">点数</param>
+        public void TumoAgari(int ten)
+        {
+            Debug.WriteLine("上がった計算処理{0},{1}",Winner,ten);
+            // 上がったユーザーは加点
+            players.Single(e => e.MyKaze == Winner).Tumo(ten);
+            var loses = players.Where(e => e.MyKaze != Winner);
+            foreach(var lose in loses)
+            {
+                if (Hantei.IsOya(lose.MyKaze, Ba))
+                {
+                    lose.Shiharai(Keisan.KoAgariOyaharai(ten));
+                }
+                else
+                {
+                    if(Hantei.IsOya(winner, Ba))
+                    {
+                        lose.Shiharai(Keisan.OyaAgariKoharai(ten));
+                    }
+                    else
+                    {
+                        lose.Shiharai(Keisan.KoAgariKoharai(ten));
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// あがったプレイヤーが親か判定し、親判定プロパティに値をセットする
         /// </summary>
         /// <param name="winner"></param>
         /// <returns></returns>
         public bool IsOya(風 winner)
         {
+            Winner = winner;
             bool oya = Hantei.IsOya(winner, Ba);
             if (oya)
             {

@@ -25,7 +25,7 @@
             <TextBlock Text="点数"/>
             <TextBox Text="{Binding Ten}"/>
         </StackPanel>
-        <Button Content="点数計算" Command="{Binding TenKeisai}"/>
+        <Button Content="点数計算" Command="{Binding TenKeisai}" />
         <Button Content="キャンセル" Click="Button_Click"/>
         <Button Content="デバッグ" Click="Button_Click_1" />
     </StackPanel>

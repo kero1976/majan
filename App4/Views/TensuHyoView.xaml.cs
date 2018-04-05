@@ -44,5 +44,6 @@ namespace 点棒数え.Views
             }
             base.OnNavigatedTo(e);
         }
+
     }
 }
