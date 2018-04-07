@@ -10,7 +10,7 @@ namespace 点棒数え.Model
     /// 自風、点棒、名前を持つ。
     /// INotifyPropertyChangedを実装したBindableBaseを継承する。
     /// プロパティの値が変更されたことをViewModelに通知する仕組みを持つがViewModelと関連を持たせない。。
-    public class Player : BindableBase, IObservable<宣言>
+    public class Player : BindableBase, IObservable<Houkoku>
     {
         // プレイヤーを監視する審判
         public Judgment myJudgment;
@@ -70,27 +70,27 @@ namespace 点棒数え.Model
         {
             Tensu = Tensu - 1000;
             if (this.myJudgment != null)
-                this.myJudgment.OnNext(宣言.リーチ);
+                this.myJudgment.OnNext(new Houkoku(MyKaze,宣言.リーチ,0));
         }
 
         public void Tumo(int ten)
         {
             Tensu = Tensu + ten;
             if (this.myJudgment != null)
-                this.myJudgment.OnNext(宣言.ツモ);
+                this.myJudgment.OnNext(new Houkoku(MyKaze, 宣言.ツモ, ten));
         }
         public void Shiharai(int ten)
         {
             Tensu = Tensu - ten;
             if (this.myJudgment != null)
-                this.myJudgment.OnNext(宣言.支払);
+                this.myJudgment.OnNext(new Houkoku(MyKaze, 宣言.支払, ten));
         }
         /// <summary>
         /// 監視開始
         /// </summary>
         /// <param name="observer"></param>
         /// <returns></returns>
-        public IDisposable Subscribe(IObserver<宣言> observer)
+        public IDisposable Subscribe(IObserver<Houkoku> observer)
         {
             this.myJudgment = (Judgment)observer;
             this.myJudgment.AddPlayer(this);

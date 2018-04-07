@@ -16,17 +16,18 @@
             <RadioButton GroupName="Group1" x:Name="子2">子</RadioButton>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="飜数"/>
+            <TextBlock Text="飜数" VerticalAlignment="Center"/>
             <ComboBox ItemsSource="{Binding HansuEnum}" SelectedValue="{Binding Han,Mode=TwoWay}"/>
-            <TextBlock Text="符"/>
+            <TextBlock Text="符" VerticalAlignment="Center"/>
             <ComboBox ItemsSource="{Binding FuNames}" SelectedValue="{Binding Fu,Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="点数"/>
+            <TextBlock Text="点数" VerticalAlignment="Center"/>
             <TextBox Text="{Binding Ten}"/>
+            <TextBlock Text="合計点数" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding GoukeiTen}"/>
         </StackPanel>
-        <Button Content="点数計算" Command="{Binding TenKeisai}" />
+        <Button Content="点数計算" Command="{Binding TenKeisai}" Click="Button_Click" />
         <Button Content="キャンセル" Click="Button_Click"/>
-        <Button Content="デバッグ" Click="Button_Click_1" />
     </StackPanel>
 </Page>

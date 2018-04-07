@@ -25,12 +25,6 @@ namespace 点棒数え.Views
             this.Frame.GoBack();
         }
 
-        private void Button_Click_1(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            Judgment Judg = Judgment.Instance;
-            Debug.WriteLine(Judg.Ba + ":" + Judg.Sentenbou + ":");
-        }
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             bool oya = Judgment.Instance.IsOya((風)e.Parameter);
@@ -44,6 +38,5 @@ namespace 点棒数え.Views
             }
             base.OnNavigatedTo(e);
         }
-
     }
 }

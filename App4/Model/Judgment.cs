@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using 点棒数え.Common;
 using System.Linq;
+using 点棒数え.Model.JudgmentSub;
+using System.Text;
 
 namespace 点棒数え.Model
 {
@@ -13,7 +15,7 @@ namespace 点棒数え.Model
     /// 審判は1人のため、シングルトン。
     /// INotifyPropertyChangedを実装したBindableBaseを継承する。
     /// プロパティの値が変更されたことをViewModelに通知する仕組みを持つがViewModelと関連を持たせない。。
-    public class Judgment : BindableBase, IObserver<宣言>
+    public class Judgment : BindableBase, IObserver<Houkoku>
     {
         private static Judgment instance = new Judgment();
 
@@ -84,19 +86,22 @@ namespace 点棒数え.Model
             Debug.WriteLine("審判「エラー」");
         }
 
-        public void OnNext(宣言 value)
+        public void OnNext(Houkoku value)
         {
-            Debug.WriteLine("審判「宣言は{0}」",value);
-            switch (value)
+            switch (value.Sengen)
             {
                 case 宣言.リーチ:
                     Sentenbou++;
+                    CreateMessage(value);
                     break;
                 case 宣言.ツモ:
                     Sentenbou = 0;
+                    CreateMessage(value);
+                    break;
+                case 宣言.支払:
+                    CreateMessage(value);
                     break;
             }
-            Debug.WriteLine("審判「千点棒は{0}」", Sentenbou);
         }
 
         /// <summary>
@@ -118,13 +123,18 @@ namespace 点棒数え.Model
             }
         }
 
+        private void CreateMessage(Houkoku value)
+        {
+            string s = $"{Ba}:{value.Kaze}が{value.Sengen}。({value.Tensu})";
+            Debug.WriteLine(s);
+        }
+
         /// <summary>
-        /// 
+        /// つも上がり
         /// </summary>
         /// <param name="ten">点数</param>
         public void TumoAgari(int ten)
         {
-            Debug.WriteLine("上がった計算処理{0},{1}",Winner,ten);
             // 上がったユーザーは加点
             players.Single(e => e.MyKaze == Winner).Tumo(ten);
             var loses = players.Where(e => e.MyKaze != Winner);
@@ -168,10 +178,27 @@ namespace 点棒数え.Model
             return oya;
         }
 
+        /// <summary>
+        /// 上がり点を計算する。(リー棒、つみ棒を含まない)
+        /// </summary>
+        /// <param name="han">飜数</param>
+        /// <param name="fu">符数</param>
+        /// <returns></returns>
         public int AgariTen(飜数 han, 符数 fu)
         {
-            return Keisan.Ten(han, fu, Oyako);
+            return AgaritenKeisan.Ten(han, fu, Oyako);
         }
 
+        /// <summary>
+        /// 上がり点を計算する。(リー棒、つみ棒を含む)
+        /// </summary>
+        /// <param name="han">飜数</param>
+        /// <param name="fu">符数</param>
+        /// <returns></returns>
+        public int GoukeiTen(飜数 han, 符数 fu)
+        {
+            int ten = AgaritenKeisan.Ten(han, fu, Oyako);
+            return ten + (Sentenbou * 1000);
+        }
     }
 }

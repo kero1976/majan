@@ -3,6 +3,7 @@ using Prism.Windows.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using 点棒数え.Common;
 using 点棒数え.Model;
 
@@ -50,7 +51,14 @@ namespace 点棒数え.ViewModels
         public int Ten
         {
             get { return this.ten; }
-            set { SetProperty(ref this.ten, value); }
+            set { SetProperty(ref this.ten, value); GoukeiTen = Judgment.Instance.GoukeiTen(Han, Fu); }
+        }
+
+        private int goukeiTen;
+        public int GoukeiTen
+        {
+            get { return this.goukeiTen; }
+            set { SetProperty(ref this.goukeiTen, value); }
         }
         public TensuHyoViewModel()
         {
