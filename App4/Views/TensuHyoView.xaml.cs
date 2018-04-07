@@ -27,15 +27,15 @@ namespace 点棒数え.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            bool oya = Judgment.Instance.IsOya((風)e.Parameter);
-            if (oya)
-            {
-                this.親2.IsChecked = true;
-            }
-            else
-            {
-                this.子2.IsChecked = true;
-            }
+            //bool oya = Judgment.Instance.IsOya((風)e.Parameter);
+            //if (oya)
+            //{
+            //    this.親2.IsChecked = true;
+            //}
+            //else
+            //{
+            //    this.子2.IsChecked = true;
+            //}
             base.OnNavigatedTo(e);
         }
     }

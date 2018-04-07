@@ -19,6 +19,7 @@ namespace 点棒数え.Model
     {
         private static Judgment instance = new Judgment();
 
+
         // 監視対象のプレイヤーを内部で持つ。誰かが上がったと通知してきたときに、他のプレイヤーから点を減らすため
         private List<Player> players = new List<Player>();
         
@@ -29,26 +30,27 @@ namespace 点棒数え.Model
         {
             this.players.Add(player);
         }
-        #region ＝＝＝＝＝＝＝＝＝＝＝＝＝プロパティ＝＝＝＝＝＝＝＝＝＝
-        private int sentenbou = 0;
-        public int Sentenbou
+
+        #region =====================千点棒(リー棒)を保存するプロパティ=====================
+        private int bou1000 = 0;
+        public int Bou1000
         {
-            get { return this.sentenbou; }
-            set { SetProperty(ref this.sentenbou, value); }
+            get { return this.bou1000; }
+            set { SetProperty(ref this.bou1000, value); }
         }
-        private 親子 oyako;
-        public 親子 Oyako
+        #endregion
+
+        #region =====================百点棒(積み棒)を保存するプロパティ=====================
+        private int bou100 = 0;
+        public int Bou100
         {
-            get { return this.oyako; }
-            set { SetProperty(ref this.oyako, value); }
+            get { return this.bou100; }
+            set { SetProperty(ref this.bou100, value); }
         }
+        #endregion
 
         private 風 winner;
-        public 風 Winner
-        {
-            get { return this.winner; }
-            set { SetProperty(ref this.winner, value); }
-        }
+
 
         private 場 ba;
         public 場 Ba
@@ -69,7 +71,7 @@ namespace 点棒数え.Model
                 }
             }
         }
-        #endregion
+
 
         public static Judgment Instance
         {
@@ -91,11 +93,12 @@ namespace 点棒数え.Model
             switch (value.Sengen)
             {
                 case 宣言.リーチ:
-                    Sentenbou++;
+                    this.players.Single(e => e.MyKaze == value.Kaze).Tensu -= 1000;
+                    Bou1000++;
                     CreateMessage(value);
                     break;
                 case 宣言.ツモ:
-                    Sentenbou = 0;
+                    this.winner = value.Kaze;
                     CreateMessage(value);
                     break;
                 case 宣言.支払:
@@ -125,7 +128,7 @@ namespace 点棒数え.Model
 
         private void CreateMessage(Houkoku value)
         {
-            string s = $"{Ba}:{value.Kaze}が{value.Sengen}。({value.Tensu})";
+            string s = $"{Ba}:{value.Kaze}が{value.Sengen}";
             Debug.WriteLine(s);
         }
 
@@ -136,46 +139,42 @@ namespace 点棒数え.Model
         public void TumoAgari(int ten)
         {
             // 上がったユーザーは加点
-            players.Single(e => e.MyKaze == Winner).Tumo(ten);
-            var loses = players.Where(e => e.MyKaze != Winner);
+            this.players.Single(e => e.MyKaze == this.winner).Tensu = (ten + Bou1000 * 1000 + Bou100 * 300);
+
+
+            var loses = this.players.Where(e => e.MyKaze != this.winner);
             foreach(var lose in loses)
             {
                 if (Hantei.IsOya(lose.MyKaze, Ba))
                 {
-                    lose.Shiharai(Keisan.KoAgariOyaharai(ten));
+                    // 自身が親なので、上がったのは子。点数の半分を払う。
+                    lose.Tensu = (Keisan.KoAgariOyaharai(ten) + Bou100 * 100);
                 }
                 else
                 {
-                    if(Hantei.IsOya(winner, Ba))
+                    if(Hantei.IsOya(this.winner, Ba))
                     {
-                        lose.Shiharai(Keisan.OyaAgariKoharai(ten));
+                        // 上がったのが親なら子は皆同じ点数(1/3)を払う
+                        lose.Tensu = (Keisan.OyaAgariKoharai(ten) + Bou100 * 100);
                     }
                     else
                     {
-                        lose.Shiharai(Keisan.KoAgariKoharai(ten));
+                        // 上がったのが子なら子は親の半分の点数を払う
+                        lose.Tensu = (Keisan.KoAgariKoharai(ten) + Bou100 * 100);
                     }
                 }
             }
-        }
 
-        /// <summary>
-        /// あがったプレイヤーが親か判定し、親判定プロパティに値をセットする
-        /// </summary>
-        /// <param name="winner"></param>
-        /// <returns></returns>
-        public bool IsOya(風 winner)
-        {
-            Winner = winner;
-            bool oya = Hantei.IsOya(winner, Ba);
-            if (oya)
+            // リー棒は上がった人に渡したので0に戻す
+            Bou1000 = 0;
+            if(Hantei.IsOya(this.winner, Ba))
             {
-                Oyako = 親子.親;
+                Bou100++;
             }
             else
             {
-                Oyako = 親子.子;
+                Bou100 = 0;
             }
-            return oya;
         }
 
         /// <summary>
@@ -184,9 +183,9 @@ namespace 点棒数え.Model
         /// <param name="han">飜数</param>
         /// <param name="fu">符数</param>
         /// <returns></returns>
-        public int AgariTen(飜数 han, 符数 fu)
+        public int AgariTen(飜数 han, 符数 fu, 親子 oyako)
         {
-            return AgaritenKeisan.Ten(han, fu, Oyako);
+            return AgaritenKeisan.Ten(han, fu, oyako);
         }
 
         /// <summary>
@@ -195,10 +194,10 @@ namespace 点棒数え.Model
         /// <param name="han">飜数</param>
         /// <param name="fu">符数</param>
         /// <returns></returns>
-        public int GoukeiTen(飜数 han, 符数 fu)
+        public int GoukeiTen(飜数 han, 符数 fu,親子 oyako)
         {
-            int ten = AgaritenKeisan.Ten(han, fu, Oyako);
-            return ten + (Sentenbou * 1000);
+            int ten = AgaritenKeisan.Ten(han, fu, oyako);
+            return ten + (Bou1000 * 1000 + Bou100 * 300);
         }
     }
 }

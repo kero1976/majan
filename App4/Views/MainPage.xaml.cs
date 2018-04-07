@@ -17,16 +17,12 @@ namespace 点棒数え.Views
         public MainPage()
         {
             this.InitializeComponent();
-            ViewModel.P1.Tumo = new DelegateCommand(() => Frame.Navigate(typeof(TensuHyoView), ViewModel.P1.Kaze.Value));
-            ViewModel.P2.Tumo = new DelegateCommand(() => Frame.Navigate(typeof(TensuHyoView), ViewModel.P2.Kaze.Value));
-            ViewModel.P3.Tumo = new DelegateCommand(() => Frame.Navigate(typeof(TensuHyoView), ViewModel.P3.Kaze.Value));
-            ViewModel.P4.Tumo = new DelegateCommand(() => Frame.Navigate(typeof(TensuHyoView), ViewModel.P4.Kaze.Value));
+            PlayerUserControlViewModel.NextPage = new System.Action(() => Frame.Navigate(typeof(TensuHyoView)));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(TensuHyoView));
         }
-
     }
 }

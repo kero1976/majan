@@ -2,9 +2,12 @@
 using Prism.Windows.Mvvm;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
+using System;
 using System.Diagnostics;
+using Windows.UI.Xaml.Controls;
 using 点棒数え.Common;
 using 点棒数え.Model;
+using 点棒数え.Views;
 
 namespace 点棒数え.ViewModels
 {
@@ -31,22 +34,20 @@ namespace 点棒数え.ViewModels
 
             this.Reche = new DelegateCommand(() =>
             {
-
-                Debug.WriteLine("リーチが押されます");
-                this.player.Rech();
+                this.player.Sengen(宣言.リーチ);
             });
             this.Tumo = new DelegateCommand(() =>
             {
-
-                Debug.WriteLine("ツモが押されます");
-                this.player.Tumo(1000);
+                this.player.Sengen(宣言.ツモ);
+                NextPage();
             });
 
 
         }
-        
-        public DelegateCommand Reche { get; }
-        public DelegateCommand Tumo { get; set; }
+
+        public DelegateCommand Reche { get; private set; }
+        public DelegateCommand Tumo { get; private set; }
+        public static Action NextPage { get; set; }
 
         public string DebugOut()
         {

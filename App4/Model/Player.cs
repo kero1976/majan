@@ -62,28 +62,10 @@ namespace 点棒数え.Model
             Tensu = _tensu;
         }
 
-        /// <summary>
-        /// リーチ
-        /// </summary>
-        /// リーチ棒の1000点を払う。審判がリー棒を回収する。
-        public void Rech()
+        public void Sengen(宣言 sengen)
         {
-            Tensu = Tensu - 1000;
             if (this.myJudgment != null)
-                this.myJudgment.OnNext(new Houkoku(MyKaze,宣言.リーチ,0));
-        }
-
-        public void Tumo(int ten)
-        {
-            Tensu = Tensu + ten;
-            if (this.myJudgment != null)
-                this.myJudgment.OnNext(new Houkoku(MyKaze, 宣言.ツモ, ten));
-        }
-        public void Shiharai(int ten)
-        {
-            Tensu = Tensu - ten;
-            if (this.myJudgment != null)
-                this.myJudgment.OnNext(new Houkoku(MyKaze, 宣言.支払, ten));
+                this.myJudgment.OnNext(new Houkoku(MyKaze, sengen));
         }
         /// <summary>
         /// 監視開始

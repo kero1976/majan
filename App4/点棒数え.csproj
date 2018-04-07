@@ -99,7 +99,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Common\Enum.cs" />
+    <Compile Include="Common\Converters.cs" />
+    <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\Hantei.cs" />
     <Compile Include="Common\Keisan.cs" />
     <Compile Include="Common\Struct.cs" />

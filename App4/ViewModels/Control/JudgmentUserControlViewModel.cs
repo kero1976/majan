@@ -13,12 +13,14 @@ namespace 点棒数え.ViewModels
         
 
         public ReactiveProperty<int> 千点棒 { get; private set; }
+        public ReactiveProperty<int> 本場 { get; private set; }
         public ReactiveProperty<場> 局面 { get; private set; }
 
         public JudgmentUserControlViewModel()
         {
             Judgment judgment = Judgment.Instance;
-            this.千点棒 = judgment.ObserveProperty(x => x.Sentenbou).ToReactiveProperty();
+            this.千点棒 = judgment.ObserveProperty(x => x.Bou1000).ToReactiveProperty();
+            this.本場 = judgment.ObserveProperty(x => x.Bou100).ToReactiveProperty();
             this.局面 = judgment.ObserveProperty(x => x.Ba).ToReactiveProperty();
 
             this.局面操作 = new DelegateCommand<string>((e) => judgment.BaControl(e));

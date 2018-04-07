@@ -29,4 +29,9 @@
         東一, 東二, 東三, 東四, 南一, 南二, 南三, 南四,
         西一, 西二, 西三, 西四, 北一, 北二, 北三, 北四,
     }
+
+    public enum HorizontalAlignment2
+    {
+        Left, Center, Right, Stretch
+    }
 }
