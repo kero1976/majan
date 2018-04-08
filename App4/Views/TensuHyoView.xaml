@@ -5,11 +5,10 @@
     xmlns:local="using:点棒数え.Views"
     xmlns:cv="using:点棒数え.Common"
     xmlns:ux="using:Windows.UI.Xaml"
-
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-              xmlns:mvvm="using:Prism.Windows.Mvvm"
-      mvvm:ViewModelLocator.AutoWireViewModel="True"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
 
     mc:Ignorable="d">
     <Page.Resources>
@@ -38,17 +37,21 @@
                     <Binding Path="TumoRon" Mode="TwoWay" ConverterParameter="ツモ" Converter="{StaticResource TumoRonE2BConverter}" />
                 </RadioButton.IsChecked>
             </RadioButton>
-            <RadioButton GroupName="TumoRonGroup" Content="ロン">
+            <RadioButton GroupName="TumoRonGroup" Content="ロン" x:Name="Ron">
                 <RadioButton.IsChecked>
                     <Binding Path="TumoRon" Mode="TwoWay" ConverterParameter="ロン" Converter="{StaticResource TumoRonE2BConverter}" />
                 </RadioButton.IsChecked>
             </RadioButton>
+            <TextBlock Text="振込" VerticalAlignment="Center" />
+            <!-- ViewModelではなくView内でDisableを操作する -->
+            <ComboBox ItemsSource="{Binding KazeEnum}" SelectedValue="{Binding FurikomiPlayer,Mode=TwoWay}" IsEnabled="{Binding IsChecked, ElementName=Ron}"/>
         </StackPanel>
         
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="飜数" VerticalAlignment="Center"/>
-            <ComboBox ItemsSource="{Binding HansuEnum}" SelectedValue="{Binding Han,Mode=TwoWay}"/>
+            <ComboBox ItemsSource="{Binding HansuEnum}" SelectedValue="{Binding Han,Mode=TwoWay}" SelectedItem="{Binding Han, Mode=TwoWay}"/>
             <TextBlock Text="符" VerticalAlignment="Center"/>
+            <!-- SelectedItemの指定がうまく出来なかったので、満貫の場合は符は関係ないのでとりあえず無しとした -->
             <ComboBox ItemsSource="{Binding FuNames}" SelectedValue="{Binding Fu,Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">

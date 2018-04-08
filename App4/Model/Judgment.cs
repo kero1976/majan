@@ -195,7 +195,7 @@ namespace 点棒数え.Model
         /// <summary>
         /// 上がった後の後処理
         /// </summary>
-        /// リー棒と積み棒を操作
+        /// リー棒と積み棒、局面を操作
         private void AgariAtoShori()
         {
             // リー棒は上がった人に渡したので0に戻す
@@ -207,6 +207,8 @@ namespace 点棒数え.Model
             else
             {
                 Bou100 = 0;
+                // 子は上がったので局面を進める
+                Ba++;
             }
         }
 

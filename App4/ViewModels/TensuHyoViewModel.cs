@@ -2,6 +2,7 @@
 using Prism.Windows.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using 点棒数え.Common;
 using 点棒数え.Model;
 
@@ -32,8 +33,19 @@ namespace 点棒数え.ViewModels
         }
         #endregion
 
+        #region =====================振込プレイヤーのコンボボックスを保存するプロパティ=====================
+        private 風 furikomiPlayer;
+        public 風 FurikomiPlayer
+        {
+            get { return this.furikomiPlayer; }
+            set { SetProperty(ref this.furikomiPlayer, value); }
+        }
+        //Enum配列のプロパティ
+        public 風[] KazeEnum { get; } = (風[])Enum.GetValues(typeof(風));
+        #endregion
+
         #region =====================飜数のコンボボックスを保存するプロパティ=====================
-        private 飜数 han;
+        private 飜数 han = 飜数.満貫;
         public 飜数 Han
         {
             get { return this.han; }
@@ -44,7 +56,7 @@ namespace 点棒数え.ViewModels
         #endregion
 
         #region =====================符数のコンボボックスを保存するプロパティ=====================
-        private 符数 fu;
+        private 符数 fu = 符数.符30;
         public 符数 Fu
         {
             get { return this.fu; }
@@ -108,6 +120,5 @@ namespace 点棒数え.ViewModels
             Ten = Judgment.AgariTen(Han, Fu, Oyako);
         }
         #endregion
-
     }
 }
