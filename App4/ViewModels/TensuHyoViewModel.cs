@@ -2,8 +2,6 @@
 using Prism.Windows.Mvvm;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading.Tasks;
 using 点棒数え.Common;
 using 点棒数え.Model;
 

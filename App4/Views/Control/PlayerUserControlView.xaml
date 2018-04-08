@@ -13,8 +13,8 @@
 
     <StackPanel Orientation="Horizontal">
         <TextBlock x:Name="風" Text="{Binding Kaze.Value,Mode=TwoWay}" VerticalAlignment="Center" Width="30" HorizontalAlignment="Center" />
-        <TextBox x:Name="名前" Text="{Binding Name.Value,Mode=TwoWay}" VerticalAlignment="Center" Width="200"/>
-        <TextBox x:Name="点数" Text="{Binding Tensu.Value,Mode=TwoWay}" VerticalAlignment="Center" Width="100"/>
+        <TextBox x:Name="名前" Text="{Binding Name.Value,Mode=TwoWay}" VerticalAlignment="Center" Width="200" Margin="5"/>
+        <TextBox x:Name="点数" Text="{Binding Tensu.Value,Mode=TwoWay}" VerticalAlignment="Center" Width="70"/>
         <Button Content="リーチ" Command="{Binding Reche}" Margin="5"/>
         <Button Content="ツモ" Command="{Binding Tumo}" Margin="5" />
     </StackPanel>

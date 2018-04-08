@@ -28,9 +28,8 @@
                     <Binding Path="Oyako" Mode="TwoWay" ConverterParameter="子" Converter="{StaticResource E2BConverter}" />
                 </RadioButton.IsChecked>
             </RadioButton>
-
-
         </StackPanel>
+        
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="飜数" VerticalAlignment="Center"/>
             <ComboBox ItemsSource="{Binding HansuEnum}" SelectedValue="{Binding Han,Mode=TwoWay}"/>

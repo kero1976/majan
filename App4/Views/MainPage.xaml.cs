@@ -19,10 +19,5 @@ namespace 点棒数え.Views
             this.InitializeComponent();
             PlayerUserControlViewModel.NextPage = new System.Action(() => Frame.Navigate(typeof(TensuHyoView)));
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(TensuHyoView));
-        }
     }
 }

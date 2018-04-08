@@ -2,7 +2,6 @@
 using Prism.Windows.Mvvm;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
-using System;
 using 点棒数え.Common;
 using 点棒数え.Model;
 
@@ -10,7 +9,6 @@ namespace 点棒数え.ViewModels
 {
     public class JudgmentUserControlViewModel: ViewModelBase
     {
-        
 
         public ReactiveProperty<int> 千点棒 { get; private set; }
         public ReactiveProperty<int> 本場 { get; private set; }

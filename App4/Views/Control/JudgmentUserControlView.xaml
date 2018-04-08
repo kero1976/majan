@@ -7,17 +7,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="100"
-    d:DesignWidth="400">
+    d:DesignWidth="500">
 
     <StackPanel Orientation="Horizontal">
         <TextBlock Text="局面" VerticalAlignment="Center" />
-        <TextBox Text="{Binding 局面.Value,Mode=TwoWay}"/>
+        <TextBox Text="{Binding 局面.Value,Mode=TwoWay}"  VerticalAlignment="Center" Margin="5"/>
         <Button Content="◀" Command="{Binding 局面操作}" CommandParameter="-1"/>
         <Button Content="クリア" Command="{Binding 局面操作}" CommandParameter="0" Margin="5"/>
         <Button Content="▶" Command="{Binding 局面操作}" CommandParameter="1"/>
-        <TextBlock Text="リー棒" VerticalAlignment="Center" />
-        <TextBox Text="{Binding 千点棒.Value,Mode=TwoWay}"/>
-        <TextBlock Text="本場" VerticalAlignment="Center" />
-        <TextBox Text="{Binding 本場.Value,Mode=TwoWay}"/>
+        <TextBlock Text="リー棒" VerticalAlignment="Center"  Margin="5"/>
+        <TextBox Text="{Binding 千点棒.Value,Mode=TwoWay}"  VerticalAlignment="Center" MinWidth="40"/>
+        <TextBlock Text="本場" VerticalAlignment="Center" Margin="5" />
+        <TextBox Text="{Binding 本場.Value,Mode=TwoWay}"  VerticalAlignment="Center"  MinWidth="40"/>
     </StackPanel>
 </UserControl>

@@ -3,11 +3,8 @@ using Prism.Windows.Mvvm;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using System;
-using System.Diagnostics;
-using Windows.UI.Xaml.Controls;
 using 点棒数え.Common;
 using 点棒数え.Model;
-using 点棒数え.Views;
 
 namespace 点棒数え.ViewModels
 {

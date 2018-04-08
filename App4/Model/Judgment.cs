@@ -2,10 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using 点棒数え.Common;
 using System.Linq;
+using 点棒数え.Common;
 using 点棒数え.Model.JudgmentSub;
-using System.Text;
 
 namespace 点棒数え.Model
 {

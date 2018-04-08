@@ -24,7 +24,6 @@
         <ScrollViewer Height="151">
             <TextBox Text="{Binding DebugMemo}" TextWrapping="Wrap"  AcceptsReturn="True"/>
         </ScrollViewer>
-        <Button Content="Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Button_Click"/>
 
     </StackPanel>
 </Page>
