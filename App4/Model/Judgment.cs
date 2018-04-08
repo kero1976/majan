@@ -141,13 +141,14 @@ namespace 点棒数え.Model
         }
 
         /// <summary>
-        /// つも上がり
+        /// ツモ上がり
         /// </summary>
         /// <param name="ten">点数</param>
         public void TumoAgari(int ten)
         {
             // 上がったユーザーは加点
-            this.players.Single(e => e.MyKaze == this.winner).Tensu += GoukeiTen(ten);
+            var win = this.players.Single(e => e.MyKaze == this.winner);
+            win.Tensu += GoukeiTen(ten);
 
 
             var loses = this.players.Where(e => e.MyKaze != this.winner);
@@ -172,7 +173,7 @@ namespace 点棒数え.Model
                     }
                 }
             }
-
+            Debug.WriteLine($"{Ba}：{win.Name}が{ten}点ツモりました。");
             AgariAtoShori();
         }
 
@@ -180,16 +181,19 @@ namespace 点棒数え.Model
         /// ロン上がり
         /// </summary>
         /// <param name="ten">点数</param>
-        public void RonAgari(int ten)
+        public void RonAgari(int ten, 風 furikomi)
         {
             // 上がったユーザーは加点
-            this.players.Single(e => e.MyKaze == this.winner).Tensu += GoukeiTen(ten);
+            var win = this.players.Single(e => e.MyKaze == this.winner);
+            win.Tensu += GoukeiTen(ten);
 
-            // TODO:東が降ったことを想定
-            var loses = this.players.Single(e => e.MyKaze == 風.東).Tensu -= GoukeiTen(ten);
+            // 振込プレイヤーは減点
+            var lose = this.players.Single(e => e.MyKaze == furikomi);
+            lose.Tensu -= GoukeiTen(ten);
+
+            Debug.WriteLine($"{Ba}：{win.Name}が{lose.Name}から{ten}点あがりました。");
 
             AgariAtoShori();
-
         }
 
         /// <summary>

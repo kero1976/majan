@@ -48,20 +48,22 @@
         </StackPanel>
         
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="飜数" VerticalAlignment="Center"/>
-            <ComboBox ItemsSource="{Binding HansuEnum}" SelectedValue="{Binding Han,Mode=TwoWay}" SelectedItem="{Binding Han, Mode=TwoWay}"/>
-            <TextBlock Text="符" VerticalAlignment="Center"/>
+            <TextBlock Text="飜数" VerticalAlignment="Center" Margin="5"/>
+            <ComboBox ItemsSource="{Binding HansuEnum}" SelectedValue="{Binding Han,Mode=TwoWay}" SelectedItem="{Binding Han, Mode=TwoWay}" Margin="5"/>
+            <TextBlock Text="符" VerticalAlignment="Center" Margin="5"/>
             <!-- SelectedItemの指定がうまく出来なかったので、満貫の場合は符は関係ないのでとりあえず無しとした -->
-            <ComboBox ItemsSource="{Binding FuNames}" SelectedValue="{Binding Fu,Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value"/>
+            <ComboBox ItemsSource="{Binding FuNames}" SelectedValue="{Binding Fu,Mode=TwoWay}" SelectedValuePath="Key" DisplayMemberPath="Value" Margin="5"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="点数" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding Ten}"/>
-            <TextBlock Text="合計点数" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding GoukeiTen}"/>
+            <TextBlock Text="点数" VerticalAlignment="Center" Margin="5" />
+            <TextBox Text="{Binding Ten}" Margin="5" MinWidth="70" />
+            <TextBlock Text="合計点数" VerticalAlignment="Center" Margin="5"/>
+            <TextBox Text="{Binding GoukeiTen}" Margin="5" MinWidth="70" />
         </StackPanel>
-        <Button Content="ツモ点数計算" Command="{Binding Tumo}" Click="Button_Click" />
-        <Button Content="ロン点数計算" Command="{Binding Ron}" Click="Button_Click" />
-        <Button Content="キャンセル" Click="Button_Click"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="ツモ点数計算" Command="{Binding Tumo}" Click="Button_Click" Margin="5"/>
+            <Button Content="ロン点数計算" Command="{Binding Ron}" Click="Button_Click" Margin="5"/>
+            <Button Content="キャンセル" Click="Button_Click" Margin="5"/>
+        </StackPanel>
     </StackPanel>
 </Page>

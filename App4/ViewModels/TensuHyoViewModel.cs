@@ -104,7 +104,7 @@ namespace 点棒数え.ViewModels
             });
             this.Ron = new DelegateCommand(() =>
             {
-                Judgment.Instance.RonAgari(Ten);
+                Judgment.Instance.RonAgari(Ten, FurikomiPlayer);
             });
         }
         public DelegateCommand Tumo { get; }

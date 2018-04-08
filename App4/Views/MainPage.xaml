@@ -13,15 +13,15 @@
     mc:Ignorable="d">
 
     
-    <StackPanel x:Name="ST" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <StackPanel>
 
-        <Control:PlayerUserControlView DataContext="{x:Bind ViewModel.P1}" x:Name="PUCV1"/>
-        <Control:PlayerUserControlView DataContext="{x:Bind ViewModel.P2}" Name="PUCV2"/>
+        <Control:PlayerUserControlView DataContext="{x:Bind ViewModel.P1}"/>
+        <Control:PlayerUserControlView DataContext="{x:Bind ViewModel.P2}"/>
         <Control:PlayerUserControlView DataContext="{x:Bind ViewModel.P3}"/>
         <Control:PlayerUserControlView DataContext="{x:Bind ViewModel.P4}"/>
         <Control:JudgmentUserControlView DataContext="{x:Bind ViewModel.Judg}" />
 
-        <ScrollViewer Height="151">
+        <ScrollViewer>
             <TextBox Text="{Binding DebugMemo}" TextWrapping="Wrap"  AcceptsReturn="True"/>
         </ScrollViewer>
 
