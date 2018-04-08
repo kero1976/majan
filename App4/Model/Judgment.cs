@@ -93,11 +93,13 @@ namespace 点棒数え.Model
             switch (value.Sengen)
             {
                 case 宣言.リーチ:
+                    // リーチの場合はすぐにプレイヤーから1000点取り、1000棒を増やす
                     this.players.Single(e => e.MyKaze == value.Kaze).Tensu -= 1000;
                     Bou1000++;
                     CreateMessage(value);
                     break;
                 case 宣言.ツモ:
+                    // ツモの場合は、ツモった人を保持し、親・子プロパティをセットし、点棒は点数申告後に変更する。
                     this.winner = value.Kaze;
                     CreateMessage(value);
                     break;
@@ -139,35 +141,35 @@ namespace 点棒数え.Model
         public void TumoAgari(int ten)
         {
             // 上がったユーザーは加点
-            this.players.Single(e => e.MyKaze == this.winner).Tensu = (ten + Bou1000 * 1000 + Bou100 * 300);
+            this.players.Single(e => e.MyKaze == this.winner).Tensu += (ten + Bou1000 * 1000 + Bou100 * 300);
 
 
             var loses = this.players.Where(e => e.MyKaze != this.winner);
             foreach(var lose in loses)
             {
-                if (Hantei.IsOya(lose.MyKaze, Ba))
+                if (IsOya(lose.MyKaze))
                 {
                     // 自身が親なので、上がったのは子。点数の半分を払う。
-                    lose.Tensu = (Keisan.KoAgariOyaharai(ten) + Bou100 * 100);
+                    lose.Tensu -= (ShiharaiTenKeisan.KoAgariOyaharai(ten) + Bou100 * 100);
                 }
                 else
                 {
-                    if(Hantei.IsOya(this.winner, Ba))
+                    if(IsOya(this.winner))
                     {
                         // 上がったのが親なら子は皆同じ点数(1/3)を払う
-                        lose.Tensu = (Keisan.OyaAgariKoharai(ten) + Bou100 * 100);
+                        lose.Tensu -= (ShiharaiTenKeisan.OyaAgariKoharai(ten) + Bou100 * 100);
                     }
                     else
                     {
                         // 上がったのが子なら子は親の半分の点数を払う
-                        lose.Tensu = (Keisan.KoAgariKoharai(ten) + Bou100 * 100);
+                        lose.Tensu -= (ShiharaiTenKeisan.KoAgariKoharai(ten) + Bou100 * 100);
                     }
                 }
             }
 
             // リー棒は上がった人に渡したので0に戻す
             Bou1000 = 0;
-            if(Hantei.IsOya(this.winner, Ba))
+            if(IsOya())
             {
                 Bou100++;
             }
@@ -175,6 +177,16 @@ namespace 点棒数え.Model
             {
                 Bou100 = 0;
             }
+        }
+
+        public bool IsOya(風 kaze)
+        {
+            return Judge.IsOya(kaze, Ba);
+        }
+
+        public bool IsOya()
+        {
+            return Judge.IsOya(this.winner, Ba);
         }
 
         /// <summary>

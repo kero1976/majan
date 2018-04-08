@@ -17,7 +17,7 @@ namespace 点棒数え.ViewModels
     class TensuHyoViewModel : ViewModelBase
     {
         #region =====================親・子のラジオボタンを保存するプロパティ=====================
-        private 親子 oyako;
+        private 親子 oyako = Judgment.Instance.IsOya()?親子.親:親子.子;
         public 親子 Oyako
         {
             get { return this.oyako; }

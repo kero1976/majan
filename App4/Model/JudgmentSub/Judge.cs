@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using 点棒数え.Common;
 
-namespace 点棒数え.Common
+namespace 点棒数え.Model.JudgmentSub
 {
-    public static class Hantei
+    class Judge
     {
+        /// <summary>
+        /// 上がったプレイヤーが親か判定する
+        /// </summary>
+        /// <param name="winner"></param>
+        /// <param name="ba"></param>
+        /// <returns></returns>
         public static bool IsOya(風 winner, 場 ba)
         {
             switch (winner)
@@ -60,6 +67,5 @@ namespace 点棒数え.Common
                     return false;
             }
         }
-
     }
 }

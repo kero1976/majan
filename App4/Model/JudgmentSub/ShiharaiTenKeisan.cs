@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace 点棒数え.Common
+namespace 点棒数え.Model.JudgmentSub
 {
-    public static class Keisan
+    public static class ShiharaiTenKeisan
     {
         /// <summary>
         /// 親が上がった場合の子の払い
@@ -79,7 +83,5 @@ namespace 点棒数え.Common
                     return (ten / 2);
             }
         }
-
-
     }
 }

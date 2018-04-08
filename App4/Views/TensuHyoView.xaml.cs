@@ -30,11 +30,11 @@ namespace 点棒数え.Views
             //bool oya = Judgment.Instance.IsOya((風)e.Parameter);
             //if (oya)
             //{
-            //    this.親2.IsChecked = true;
+            //    this.親.IsChecked = true;
             //}
             //else
             //{
-            //    this.子2.IsChecked = true;
+            //    this.子.IsChecked = true;
             //}
             base.OnNavigatedTo(e);
         }
