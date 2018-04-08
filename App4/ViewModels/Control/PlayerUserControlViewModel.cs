@@ -38,12 +38,17 @@ namespace 点棒数え.ViewModels
                 this.player.Sengen(宣言.ツモ);
                 NextPage();
             });
-
+            this.Ron = new DelegateCommand(() =>
+            {
+                this.player.Sengen(宣言.ロン);
+                NextPage();
+            });
 
         }
 
         public DelegateCommand Reche { get; private set; }
         public DelegateCommand Tumo { get; private set; }
+        public DelegateCommand Ron { get; private set; }
         public static Action NextPage { get; set; }
 
         public string DebugOut()

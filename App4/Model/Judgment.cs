@@ -49,7 +49,7 @@ namespace 点棒数え.Model
         #endregion
 
         private 風 winner;
-
+        public 宣言 TumoRon { set; get; }
 
         private 場 ba;
         public 場 Ba
@@ -98,6 +98,13 @@ namespace 点棒数え.Model
                     CreateMessage(value);
                     break;
                 case 宣言.ツモ:
+                    TumoRon = 宣言.ツモ;
+                    this.winner = value.Kaze;
+                    CreateMessage(value);
+                    break;
+                case 宣言.ロン:
+
+                    TumoRon = 宣言.ロン;
                     // ツモの場合は、ツモった人を保持し、親・子プロパティをセットし、点棒は点数申告後に変更する。
                     this.winner = value.Kaze;
                     CreateMessage(value);
@@ -140,7 +147,7 @@ namespace 点棒数え.Model
         public void TumoAgari(int ten)
         {
             // 上がったユーザーは加点
-            this.players.Single(e => e.MyKaze == this.winner).Tensu += (ten + Bou1000 * 1000 + Bou100 * 300);
+            this.players.Single(e => e.MyKaze == this.winner).Tensu += GoukeiTen(ten);
 
 
             var loses = this.players.Where(e => e.MyKaze != this.winner);
@@ -166,9 +173,34 @@ namespace 点棒数え.Model
                 }
             }
 
+            AgariAtoShori();
+        }
+
+        /// <summary>
+        /// ロン上がり
+        /// </summary>
+        /// <param name="ten">点数</param>
+        public void RonAgari(int ten)
+        {
+            // 上がったユーザーは加点
+            this.players.Single(e => e.MyKaze == this.winner).Tensu += GoukeiTen(ten);
+
+            // TODO:東が降ったことを想定
+            var loses = this.players.Single(e => e.MyKaze == 風.東).Tensu -= GoukeiTen(ten);
+
+            AgariAtoShori();
+
+        }
+
+        /// <summary>
+        /// 上がった後の後処理
+        /// </summary>
+        /// リー棒と積み棒を操作
+        private void AgariAtoShori()
+        {
             // リー棒は上がった人に渡したので0に戻す
             Bou1000 = 0;
-            if(IsOya())
+            if (IsOya())
             {
                 Bou100++;
             }
@@ -178,7 +210,7 @@ namespace 点棒数え.Model
             }
         }
 
-        public bool IsOya(風 kaze)
+        private bool IsOya(風 kaze)
         {
             return Judge.IsOya(kaze, Ba);
         }
@@ -194,7 +226,7 @@ namespace 点棒数え.Model
         /// <param name="han">飜数</param>
         /// <param name="fu">符数</param>
         /// <returns></returns>
-        public int AgariTen(飜数 han, 符数 fu, 親子 oyako)
+        public static int AgariTen(飜数 han, 符数 fu, 親子 oyako)
         {
             return AgaritenKeisan.Ten(han, fu, oyako);
         }
@@ -205,9 +237,8 @@ namespace 点棒数え.Model
         /// <param name="han">飜数</param>
         /// <param name="fu">符数</param>
         /// <returns></returns>
-        public int GoukeiTen(飜数 han, 符数 fu,親子 oyako)
+        public int GoukeiTen(int ten)
         {
-            int ten = AgaritenKeisan.Ten(han, fu, oyako);
             return ten + (Bou1000 * 1000 + Bou100 * 300);
         }
     }

@@ -13,19 +13,34 @@
 
     mc:Ignorable="d">
     <Page.Resources>
-        <cv:OyakoEnum2BooleanConverter x:Key="E2BConverter"/>
+        <cv:OyakoEnum2BooleanConverter x:Key="OyakoE2BConverter"/>
+        <cv:SengenEnum2BooleanConverter x:Key="TumoRonE2BConverter"/>
     </Page.Resources>
     <StackPanel>
         <StackPanel Orientation="Horizontal">
 
             <RadioButton GroupName="OyaKoGroup" Content="親">
                 <RadioButton.IsChecked>
-                    <Binding Path="Oyako" Mode="TwoWay" ConverterParameter="親" Converter="{StaticResource E2BConverter}" />
+                    <Binding Path="Oyako" Mode="TwoWay" ConverterParameter="親" Converter="{StaticResource OyakoE2BConverter}" />
                 </RadioButton.IsChecked>
             </RadioButton>
             <RadioButton GroupName="OyaKoGroup" Content="子">
                 <RadioButton.IsChecked>
-                    <Binding Path="Oyako" Mode="TwoWay" ConverterParameter="子" Converter="{StaticResource E2BConverter}" />
+                    <Binding Path="Oyako" Mode="TwoWay" ConverterParameter="子" Converter="{StaticResource OyakoE2BConverter}" />
+                </RadioButton.IsChecked>
+            </RadioButton>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+
+            <RadioButton GroupName="TumoRonGroup" Content="ツモ">
+                <RadioButton.IsChecked>
+                    <Binding Path="TumoRon" Mode="TwoWay" ConverterParameter="ツモ" Converter="{StaticResource TumoRonE2BConverter}" />
+                </RadioButton.IsChecked>
+            </RadioButton>
+            <RadioButton GroupName="TumoRonGroup" Content="ロン">
+                <RadioButton.IsChecked>
+                    <Binding Path="TumoRon" Mode="TwoWay" ConverterParameter="ロン" Converter="{StaticResource TumoRonE2BConverter}" />
                 </RadioButton.IsChecked>
             </RadioButton>
         </StackPanel>
@@ -42,7 +57,8 @@
             <TextBlock Text="合計点数" VerticalAlignment="Center"/>
             <TextBox Text="{Binding GoukeiTen}"/>
         </StackPanel>
-        <Button Content="点数計算" Command="{Binding Tumo}" Click="Button_Click" />
+        <Button Content="ツモ点数計算" Command="{Binding Tumo}" Click="Button_Click" />
+        <Button Content="ロン点数計算" Command="{Binding Ron}" Click="Button_Click" />
         <Button Content="キャンセル" Click="Button_Click"/>
     </StackPanel>
 </Page>

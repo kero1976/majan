@@ -23,6 +23,15 @@ namespace 点棒数え.ViewModels
         }
         #endregion
 
+        #region =====================ツモ・ロンのラジオボタンを保存するプロパティ=====================
+        private 宣言 tumoRon = Judgment.Instance.TumoRon;
+        public 宣言 TumoRon
+        {
+            get { return this.tumoRon; }
+            set { SetProperty(ref this.tumoRon, value); }
+        }
+        #endregion
+
         #region =====================飜数のコンボボックスを保存するプロパティ=====================
         private 飜数 han;
         public 飜数 Han
@@ -61,7 +70,7 @@ namespace 点棒数え.ViewModels
         public int Ten
         {
             get { return this.ten; }
-            set { SetProperty(ref this.ten, value); GoukeiTen = Judgment.Instance.GoukeiTen(Han, Fu, Oyako); }
+            set { SetProperty(ref this.ten, value); GoukeiTen = Judgment.Instance.GoukeiTen(Ten); }
         }
         #endregion
 
@@ -74,15 +83,21 @@ namespace 点棒数え.ViewModels
         }
         #endregion
 
-
+        #region =====================コンストラクタとコマンド=====================
         public TensuHyoViewModel()
         {
             this.Tumo = new DelegateCommand(() =>
             {
                 Judgment.Instance.TumoAgari(Ten);
             });
+            this.Ron = new DelegateCommand(() =>
+            {
+                Judgment.Instance.RonAgari(Ten);
+            });
         }
         public DelegateCommand Tumo { get; }
+        public DelegateCommand Ron { get; }
+        #endregion
 
         #region =====================プライベートメソッド=====================
         /// <summary>
@@ -90,7 +105,7 @@ namespace 点棒数え.ViewModels
         /// </summary>
         private void TenKeisan()
         {
-            Ten = Judgment.Instance.AgariTen(Han, Fu, Oyako);
+            Ten = Judgment.AgariTen(Han, Fu, Oyako);
         }
         #endregion
 
