@@ -2,6 +2,7 @@
 using Prism.Windows.Mvvm;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
+using System.Diagnostics;
 using 点棒数え.Common;
 using 点棒数え.Model;
 
@@ -22,9 +23,11 @@ namespace 点棒数え.ViewModels
             this.局面 = judgment.ObserveProperty(x => x.Ba).ToReactiveProperty();
 
             this.局面操作 = new DelegateCommand<string>((e) => judgment.BaControl(e));
+            this.流局 = new DelegateCommand(() => judgment.Ryukyoku());
         }
 
         public DelegateCommand<string> 局面操作 { get; }
+        public DelegateCommand 流局 { get; }
 
         public string DebugOut()
         {

@@ -134,6 +134,11 @@ namespace 点棒数え.Model
             }
         }
 
+        public void Ryukyoku()
+        {
+            Debug.WriteLine($"流局です");
+            Debug.WriteLine($"P1:{players[0].IsTenpai}, P2:{ players[1].IsTenpai},P3: { players[2].IsTenpai},P4: { players[3].IsTenpai}");
+        }
         private void CreateMessage(Houkoku value)
         {
             string s = $"{Ba}:{value.Kaze}が{value.Sengen}";

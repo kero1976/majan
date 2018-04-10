@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="100"
-    d:DesignWidth="500">
+    d:DesignWidth="600">
 
     <StackPanel Orientation="Horizontal">
         <TextBlock Text="局面" VerticalAlignment="Center" Margin="10,5,5,5"/>
@@ -19,6 +19,6 @@
         <TextBox Text="{Binding 千点棒.Value,Mode=TwoWay}"  VerticalAlignment="Center" MinWidth="40"/>
         <TextBlock Text="本場" VerticalAlignment="Center" Margin="5" />
         <TextBox Text="{Binding 本場.Value,Mode=TwoWay}"  VerticalAlignment="Center"  MinWidth="40"/>
-        <Button Content="流局" Margin="30,5,5,5" MinWidth="60" />
+        <Button Content="流局" Command="{Binding 流局}" Margin="30,5,5,5" MinWidth="60" />
     </StackPanel>
 </UserControl>

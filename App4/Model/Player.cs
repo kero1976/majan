@@ -1,5 +1,6 @@
 ﻿using Prism.Mvvm;
 using System;
+using System.Diagnostics;
 using 点棒数え.Common;
 
 namespace 点棒数え.Model
@@ -20,6 +21,7 @@ namespace 点棒数え.Model
         private 風 myKaze;
         private int tensu;
         private string name;
+        private bool isTenpai;
 
         /// <summary>
         /// 点数
@@ -46,6 +48,15 @@ namespace 点棒数え.Model
         {
             get { return this.name; }
             set { SetProperty(ref this.name, value); }
+        }
+
+        /// <summary>
+        /// 流局時用テンパイフラグ
+        /// </summary>
+        public bool IsTenpai
+        {
+            get { return this.isTenpai; }
+            set { SetProperty(ref this.isTenpai, value); }
         }
         #endregion
 
