@@ -62,5 +62,6 @@ namespace 点棒数え.Model.JudgmentSub
                     return false;
             }
         }
+
     }
 }

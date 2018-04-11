@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using Microsoft.Practices.ObjectBuilder2;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -136,6 +137,31 @@ namespace 点棒数え.Model
 
         public void Ryukyoku()
         {
+            int tenpaiCount = this.players.Count(e => e.IsTenpai);
+            switch (tenpaiCount)
+            {
+                case 0:
+                    Debug.WriteLine("全員ノーテン");
+                    break;
+                case 1:
+                    Debug.WriteLine("1人テンパイ");
+                    this.players.Where(e => e.IsTenpai).ForEach(e => e.Tensu += 3000);
+                    this.players.Where(e => !e.IsTenpai).ForEach(e => e.Tensu -= 1000);
+                    break;
+                case 2:
+                    Debug.WriteLine("2人テンパイ");
+                    this.players.Where(e => e.IsTenpai).ForEach(e => e.Tensu += 1500);
+                    this.players.Where(e => !e.IsTenpai).ForEach(e => e.Tensu -= 1500);
+                    break;
+                case 3:
+                    Debug.WriteLine("3人テンパイ");
+                    this.players.Where(e => e.IsTenpai).ForEach(e => e.Tensu += 1000);
+                    this.players.Where(e => !e.IsTenpai).ForEach(e => e.Tensu -= 3000);
+                    break;
+                case 4:
+                    Debug.WriteLine("全員テンパイ");
+                    break;
+            }
             Debug.WriteLine($"流局です");
             Debug.WriteLine($"P1:{players[0].IsTenpai}, P2:{ players[1].IsTenpai},P3: { players[2].IsTenpai},P4: { players[3].IsTenpai}");
         }
