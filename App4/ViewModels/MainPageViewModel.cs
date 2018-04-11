@@ -6,7 +6,7 @@ namespace 点棒数え.ViewModels
 {
     class MainPageViewModel : ViewModelBase
     {
-        static int 初期点数 = 25000;
+        static int 初期点数 = Config.Instance.InitTenbo;
         public PlayerUserControlViewModel P1 = new PlayerUserControlViewModel(風.東, "プレイヤー1", 初期点数);
         public PlayerUserControlViewModel P2 = new PlayerUserControlViewModel(風.南, "プレイヤー2", 初期点数);
         public PlayerUserControlViewModel P3 = new PlayerUserControlViewModel(風.西, "プレイヤー3", 初期点数);

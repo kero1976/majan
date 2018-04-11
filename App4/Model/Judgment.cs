@@ -128,6 +128,7 @@ namespace 点棒数え.Model
                     break;
                 case "0":
                     Ba = 場.東一;
+                    Clear();
                     break;
                 case "1":
                     Ba++;
@@ -145,24 +146,27 @@ namespace 点棒数え.Model
                     break;
                 case 1:
                     Debug.WriteLine("1人テンパイ");
-                    this.players.Where(e => e.IsTenpai).ForEach(e => e.Tensu += 3000);
-                    this.players.Where(e => !e.IsTenpai).ForEach(e => e.Tensu -= 1000);
+                    this.players.ForEach(e => e.Tensu = e.IsTenpai? e.Tensu += 3000 : e.Tensu -= 1000);
                     break;
                 case 2:
                     Debug.WriteLine("2人テンパイ");
-                    this.players.Where(e => e.IsTenpai).ForEach(e => e.Tensu += 1500);
-                    this.players.Where(e => !e.IsTenpai).ForEach(e => e.Tensu -= 1500);
+                    this.players.ForEach(e => e.Tensu = e.IsTenpai ? e.Tensu += 1500 : e.Tensu -= 1500);
                     break;
                 case 3:
                     Debug.WriteLine("3人テンパイ");
-                    this.players.Where(e => e.IsTenpai).ForEach(e => e.Tensu += 1000);
-                    this.players.Where(e => !e.IsTenpai).ForEach(e => e.Tensu -= 3000);
+                    this.players.ForEach(e => e.Tensu = e.IsTenpai ? e.Tensu += 1000 : e.Tensu -= 3000);
                     break;
                 case 4:
                     Debug.WriteLine("全員テンパイ");
                     break;
             }
             Debug.WriteLine($"流局です");
+            if (Judge.IsRyukyoku(players, Ba))
+            {
+                Debug.WriteLine($"流します");
+                BaControl("1");
+            }
+            Bou100++;
             Debug.WriteLine($"P1:{players[0].IsTenpai}, P2:{ players[1].IsTenpai},P3: { players[2].IsTenpai},P4: { players[3].IsTenpai}");
         }
         private void CreateMessage(Houkoku value)
@@ -220,7 +224,7 @@ namespace 点棒数え.Model
 
             // 振込プレイヤーは減点
             var lose = this.players.Single(e => e.MyKaze == furikomi);
-            lose.Tensu -= GoukeiTen(ten);
+            lose.Tensu -= GoukeiTen(ten) - Bou1000 * 1000;
 
             Debug.WriteLine($"{Ba}：{win.Name}が{lose.Name}から{ten}点あがりました。");
 
@@ -277,6 +281,15 @@ namespace 点棒数え.Model
         public int GoukeiTen(int ten)
         {
             return ten + (Bou1000 * 1000 + Bou100 * 300);
+        }
+
+        private void Clear()
+        {
+            // 点数を初期値に戻す
+            this.players.ForEach(e => e.Tensu = Config.Instance.InitTenbo);
+            Bou1000 = 0;
+            Bou100 = 0;
+
         }
     }
 }

@@ -99,6 +99,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\Config.cs" />
     <Compile Include="Common\Converters.cs" />
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\Struct.cs" />

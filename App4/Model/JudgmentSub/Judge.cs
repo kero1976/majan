@@ -1,4 +1,6 @@
-﻿using 点棒数え.Common;
+﻿using System.Collections.Generic;
+using System.Linq;
+using 点棒数え.Common;
 
 namespace 点棒数え.Model.JudgmentSub
 {
@@ -63,5 +65,16 @@ namespace 点棒数え.Model.JudgmentSub
             }
         }
 
+        /// <summary>
+        /// 流局するか判定する
+        /// </summary>
+        /// 親がノーテンだったら流局する
+        /// <param name="players"></param>
+        /// <param name="ba"></param>
+        /// <returns></returns>
+        public static bool IsRyukyoku(List<Player> players, 場 ba)
+        {
+            return !players.Single(e => IsOya(e.MyKaze, ba)).IsTenpai;
+        }
     }
 }
