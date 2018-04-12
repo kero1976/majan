@@ -183,8 +183,9 @@ namespace 点棒数え.Model
         {
             // 上がったユーザーは加点
             var win = this.players.Single(e => e.MyKaze == this.winner);
-            win.Tensu += GoukeiTen(ten);
-
+            //5800のツモは2000オールで6000になるので子の払った点数をもらう
+            //win.Tensu += GoukeiTen(ten);
+            win.Tensu += Bou1000 * 1000;
 
             var loses = this.players.Where(e => e.MyKaze != this.winner);
             foreach(var lose in loses)
@@ -193,6 +194,7 @@ namespace 点棒数え.Model
                 {
                     // 自身が親なので、上がったのは子。点数の半分を払う。
                     lose.Tensu -= (ShiharaiTenKeisan.KoAgariOyaharai(ten) + Bou100 * 100);
+                    win.Tensu += (ShiharaiTenKeisan.KoAgariOyaharai(ten) + Bou100 * 100);
                 }
                 else
                 {
@@ -200,11 +202,13 @@ namespace 点棒数え.Model
                     {
                         // 上がったのが親なら子は皆同じ点数(1/3)を払う
                         lose.Tensu -= (ShiharaiTenKeisan.OyaAgariKoharai(ten) + Bou100 * 100);
+                        win.Tensu += (ShiharaiTenKeisan.OyaAgariKoharai(ten) + Bou100 * 100);
                     }
                     else
                     {
                         // 上がったのが子なら子は親の半分の点数を払う
                         lose.Tensu -= (ShiharaiTenKeisan.KoAgariKoharai(ten) + Bou100 * 100);
+                        win.Tensu += (ShiharaiTenKeisan.KoAgariKoharai(ten) + Bou100 * 100);
                     }
                 }
             }
