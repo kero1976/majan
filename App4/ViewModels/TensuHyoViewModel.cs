@@ -29,7 +29,11 @@ namespace 点棒数え.ViewModels
         public 宣言 TumoRon
         {
             get { return this.tumoRon; }
-            set { SetProperty(ref this.tumoRon, value); }
+            set {
+                SetProperty(ref this.tumoRon, value);
+                this.Tumo.RaiseCanExecuteChanged();
+                this.Ron.RaiseCanExecuteChanged();
+            }
         }
         #endregion
 
@@ -101,11 +105,11 @@ namespace 点棒数え.ViewModels
             this.Tumo = new DelegateCommand(() =>
             {
                 Judgment.Instance.TumoAgari(Ten);
-            });
+            }, () => 宣言.ツモ.Equals(TumoRon));
             this.Ron = new DelegateCommand(() =>
             {
                 Judgment.Instance.RonAgari(Ten, FurikomiPlayer);
-            });
+            }, () => 宣言.ロン.Equals(TumoRon));
         }
         public DelegateCommand Tumo { get; }
         public DelegateCommand Ron { get; }
